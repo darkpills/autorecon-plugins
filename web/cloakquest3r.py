@@ -1,4 +1,5 @@
 from autorecon.plugins import ServiceScan
+import os
 
 class CloakQuest3r(ServiceScan):
 
@@ -8,6 +9,11 @@ class CloakQuest3r(ServiceScan):
         self.tags = ['default', 'safe', 'http', 'darkpills']
         self.priority = 2
 
+    def check(self):
+        if os.path.isfile('/opt/my-resources/CloakQuest3r//cloakquest3r.py') is None:
+            self.error('The program cloakquest3r could not be found. Make sure it is installed.')
+            return False
+        
     def configure(self):
         self.match_service_name('^http')
         self.match_service_name('^nacn_http$', negative_match=True)

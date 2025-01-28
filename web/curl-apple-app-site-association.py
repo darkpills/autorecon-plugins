@@ -10,7 +10,7 @@ class CurlAppleAppSiteAssociation(ServiceScan):
     def configure(self):
         self.match_service_name('^http')
         self.match_service_name('^nacn_http$', negative_match=True)
-        self.add_pattern('^HTTP.*200.*')
+        self.add_pattern('^HTTP.*200.*', 'Apple Site Association found')
 
     async def run(self, service):
         if service.protocol == 'tcp':
